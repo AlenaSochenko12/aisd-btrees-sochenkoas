@@ -1,2 +1,0 @@
-C:\Users\Алёна\source\ConsoleApplication2\x64\Debug\ConsoleApplication2.exe
-C:\Users\Алёна\source\B-tree\x64\Debug\ConsoleApplication2.exe
