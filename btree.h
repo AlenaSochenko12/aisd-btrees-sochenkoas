@@ -16,7 +16,7 @@ struct btreeNode {
 
 btreeNode* root;
 
-//создание нового узла
+//СЃРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ СѓР·Р»Р°
 btreeNode* createNode(int val, btreeNode* child) {
     btreeNode* newNode = new btreeNode;
     newNode->val[1] = val;
@@ -26,7 +26,7 @@ btreeNode* createNode(int val, btreeNode* child) {
     return newNode;
 }
 
-//помещаем значение на соответствующую позицию
+//РїРѕРјРµС‰Р°РµРј Р·РЅР°С‡РµРЅРёРµ РЅР° СЃРѕРѕС‚РІРµС‚СЃС‚РІСѓСЋС‰СѓСЋ РїРѕР·РёС†РёСЋ
 void addValToNode(int val, int pos, btreeNode* node, btreeNode* child) {
     int j = node->count;
     while (j > pos) {
@@ -39,7 +39,7 @@ void addValToNode(int val, int pos, btreeNode* node, btreeNode* child) {
     node->count++;
 }
 
-//разделение узла
+//СЂР°Р·РґРµР»РµРЅРёРµ СѓР·Р»Р°
 void splitNode(int val, int* pval, int pos, btreeNode* node, btreeNode* child, btreeNode** newNode) {
     int median, j;
 
@@ -69,7 +69,7 @@ void splitNode(int val, int* pval, int pos, btreeNode* node, btreeNode* child, b
     node->count--;
 }
 
-//установка значения в узле
+//СѓСЃС‚Р°РЅРѕРІРєР° Р·РЅР°С‡РµРЅРёСЏ РІ СѓР·Р»Рµ
 int setValueInNode(int val, int* pval, btreeNode* node, btreeNode** child) {
 
     int pos;
@@ -86,7 +86,6 @@ int setValueInNode(int val, int* pval, btreeNode* node, btreeNode** child) {
         for (pos = node->count;
             (val < node->val[pos] && pos > 1); pos--);
         if (val == node->val[pos]) {
-            cout << "Duplicates not allowed\n";
             return 0;
         }
     }
@@ -102,7 +101,7 @@ int setValueInNode(int val, int* pval, btreeNode* node, btreeNode** child) {
     return 0;
 }
 
-//вставка в дерево
+//РІСЃС‚Р°РІРєР° РІ РґРµСЂРµРІРѕ
 void insertion(int val) {
     int flag, i;
     btreeNode* child;
@@ -112,7 +111,7 @@ void insertion(int val) {
         root = createNode(i, child);
 }
 
-//копируем преемника для удаляемого значения
+//РєРѕРїРёСЂСѓРµРј РїСЂРµРµРјРЅРёРєР° РґР»СЏ СѓРґР°Р»СЏРµРјРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ
 void copySuccessor(btreeNode* myNode, int pos) {
     btreeNode* dummy;
     dummy = myNode->link[pos];
@@ -123,7 +122,7 @@ void copySuccessor(btreeNode* myNode, int pos) {
 
 }
 
-//удаляем значение из заданного узла и переставляем значения
+//СѓРґР°Р»СЏРµРј Р·РЅР°С‡РµРЅРёРµ РёР· Р·Р°РґР°РЅРЅРѕРіРѕ СѓР·Р»Р° Рё РїРµСЂРµСЃС‚Р°РІР»СЏРµРј Р·РЅР°С‡РµРЅРёСЏ
 void removeVal(btreeNode* myNode, int pos) {
     int i = pos + 1;
     while (i <= myNode->count) {
@@ -134,7 +133,7 @@ void removeVal(btreeNode* myNode, int pos) {
     myNode->count--;
 }
 
-//сдвигаем значение от родителя к правому потомку
+//СЃРґРІРёРіР°РµРј Р·РЅР°С‡РµРЅРёРµ РѕС‚ СЂРѕРґРёС‚РµР»СЏ Рє РїСЂР°РІРѕРјСѓ РїРѕС‚РѕРјРєСѓ
 void doRightShift(btreeNode* myNode, int pos) {
     btreeNode* x = myNode->link[pos];
     int j = x->count;
@@ -154,7 +153,7 @@ void doRightShift(btreeNode* myNode, int pos) {
     return;
 }
 
-//сдвигаем значение от родителя к левому потомку
+//СЃРґРІРёРіР°РµРј Р·РЅР°С‡РµРЅРёРµ РѕС‚ СЂРѕРґРёС‚РµР»СЏ Рє Р»РµРІРѕРјСѓ РїРѕС‚РѕРјРєСѓ
 void doLeftShift(btreeNode* myNode, int pos) {
     int j = 1;
     btreeNode* x = myNode->link[pos - 1];
@@ -176,7 +175,7 @@ void doLeftShift(btreeNode* myNode, int pos) {
     return;
 }
 
-//объединение узлов
+//РѕР±СЉРµРґРёРЅРµРЅРёРµ СѓР·Р»РѕРІ
 void mergeNodes(btreeNode* myNode, int pos) {
     int j = 1;
     btreeNode* x1 = myNode->link[pos], * x2 = myNode->link[pos - 1];
@@ -202,7 +201,7 @@ void mergeNodes(btreeNode* myNode, int pos) {
     free(x1);
 }
 
-//корректировка узла
+//РєРѕСЂСЂРµРєС‚РёСЂРѕРІРєР° СѓР·Р»Р°
 void adjustNode(btreeNode* myNode, int pos) {
     if (!pos) {
         if (myNode->link[1]->count > MIN) {
@@ -235,7 +234,7 @@ void adjustNode(btreeNode* myNode, int pos) {
     }
 }
 
-//удаление значения из узла
+//СѓРґР°Р»РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РёР· СѓР·Р»Р°
 int delValFromNode(int val, btreeNode* myNode) {
     int pos, flag = 0;
     if (myNode) {
@@ -258,7 +257,7 @@ int delValFromNode(int val, btreeNode* myNode) {
                 copySuccessor(myNode, pos);
                 flag = delValFromNode(myNode->val[pos], myNode->link[pos]);
                 if (flag == 0) {
-                    cout << "\nЭлемент не найден в дереве\n";
+                    cout << "\nГќГ«ГҐГ¬ГҐГ­ГІ Г­ГҐ Г­Г Г©Г¤ГҐГ­ Гў Г¤ГҐГ°ГҐГўГҐ\n";
                 }
             }
             else {
@@ -276,11 +275,11 @@ int delValFromNode(int val, btreeNode* myNode) {
     return flag;
 }
 
-//удаление значения из дерева
+//СѓРґР°Р»РµРЅРёРµ Р·РЅР°С‡РµРЅРёСЏ РёР· РґРµСЂРµРІР°
 void deletion(int val, btreeNode* myNode) {
     btreeNode* tmp;
     if (!delValFromNode(val, myNode)) {
-        cout << "\nЭлемент не найден в дереве\n";
+        cout << "\nГќГ«ГҐГ¬ГҐГ­ГІ Г­ГҐ Г­Г Г©Г¤ГҐГ­ Гў Г¤ГҐГ°ГҐГўГҐ\n";
         return;
     }
     else {
@@ -289,13 +288,13 @@ void deletion(int val, btreeNode* myNode) {
             myNode = myNode->link[0];
             free(tmp);
         }
-        cout << "\nЧисло успешно удалено!";
+        cout << "\nГ—ГЁГ±Г«Г® ГіГ±ГЇГҐГёГ­Г® ГіГ¤Г Г«ГҐГ­Г®!";
     }
     root = myNode;
     return;
 }
 
-//поиск значения в дереве
+//РїРѕРёСЃРє Р·РЅР°С‡РµРЅРёСЏ РІ РґРµСЂРµРІРµ
 void searching(int val, int* pos, btreeNode* myNode) {
     if (!myNode) {
         return;
@@ -308,11 +307,11 @@ void searching(int val, int* pos, btreeNode* myNode) {
         for (*pos = myNode->count;
             (val < myNode->val[*pos] && *pos > 1); (*pos)--);
         if (val == myNode->val[*pos]) {
-            cout << "\nЭлемент найден\n";
+            cout << "\nГќГ«ГҐГ¬ГҐГ­ГІ Г­Г Г©Г¤ГҐГ­\n";
             return;
         }
         else {
-            cout << "\nЭлемент не найден\n";
+            cout << "\nГќГ«ГҐГ¬ГҐГ­ГІ Г­ГҐ Г­Г Г©Г¤ГҐГ­\n";
             return;
         }
     }
@@ -320,7 +319,7 @@ void searching(int val, int* pos, btreeNode* myNode) {
     return;
 }
 
-//обход дерева
+//РѕР±С…РѕРґ РґРµСЂРµРІР°
 void traversal(btreeNode* myNode) {
     int i;
     if (myNode) {
@@ -336,23 +335,23 @@ int main() {
     setlocale(LC_ALL, "Russian");
     int val, opt;
     while (true) {
-        cout << " 1. Вставка элемента\n 2. Удаление элемента\n 3. Поиск элемента\n 4. Построение дерева\n 5. Выход\n  Введите номер операции:";
+        cout << " 1. Р’СЃС‚Р°РІРєР° СЌР»РµРјРµРЅС‚Р°\n 2. РЈРґР°Р»РµРЅРёРµ СЌР»РµРјРµРЅС‚Р°\n 3. РџРѕРёСЃРє СЌР»РµРјРµРЅС‚Р°\n 4. РџРѕСЃС‚СЂРѕРµРЅРёРµ РґРµСЂРµРІР°\n 5. Р’С‹С…РѕРґ\n  Р’РІРµРґРёС‚Рµ РЅРѕРјРµСЂ РѕРїРµСЂР°С†РёРё: ";
         cin >> opt;
         cout << endl;
         switch (opt) {
         case 1:
-            cout << "Введите число: ";
+            cout << "Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ: ";
             cin >> val;
             insertion(val);
-            cout << "\nЧисло успешно добавлено!\n";
+            cout << "\nР§РёСЃР»Рѕ СѓСЃРїРµС€РЅРѕ РґРѕР±Р°РІР»РµРЅРѕ!\n";
             break;
         case 2:
-            cout << "Введите элемент, который необходимо удалить: ";
+            cout << "Р’РІРµРґРёС‚Рµ СЌР»РµРјРµРЅС‚, РєРѕС‚РѕСЂС‹Р№ РЅРµРѕР±С…РѕРґРёРјРѕ СѓРґР°Р»РёС‚СЊ: ";
             cin >> val;
             deletion(val, root);
             break;
         case 3:
-            cout << "Введите элемент, который необходимо найти: ";
+            cout << "Р’РІРµРґРёС‚Рµ СЌР»РµРјРµРЅС‚, РєРѕС‚РѕСЂС‹Р№ РЅРµРѕР±С…РѕРґРёРјРѕ РЅР°Р№С‚Рё: ";
             cin >> val;
             searching(val, &opt, root);
             break;
